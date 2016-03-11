@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-
+int xfgh = 0;
 int* CountBits(int n, int* result_size) {
    int msb=0;
     int pos=0,ctr=0;
