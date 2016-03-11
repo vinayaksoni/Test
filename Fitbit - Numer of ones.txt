@@ -1,0 +1,91 @@
+#include <iostream>
+using namespace std;
+
+int* CountBits(int n, int* result_size) {
+   int msb=0;
+    int pos=0,ctr=0;
+    int one_ctr=0,i=1;
+    int m=n;
+    while(n!=0)
+    {
+        int rem=n%2;
+        ctr++;
+        if(rem==1 && msb==0)
+        {
+            pos=ctr;
+            //printf("pos : %d",pos);
+            one_ctr++;
+            msb=1;
+        }
+        else if(rem==1 && msb==1)
+        {
+            one_ctr++;
+        }
+        n=n/2;
+    }
+        n=m;
+    static int ret[100];
+    int fin[ctr];
+    for(int i=0;i<ctr;i++)
+        fin[ctr]=0;
+    one_ctr=0;
+    int ctr1=ctr;
+    //printf("\nctr1 : %d",ctr1);
+    ctr=0;
+    int j=1;
+    msb=0;
+    //printf("n:%d",n);
+    while(n!=0)
+    {
+        int rem=n % 2;
+        ctr++;
+        if(rem==1 && msb==0)
+        {
+            pos=ctr1 - ctr + 1;
+            one_ctr++;
+            msb=1;
+            fin[j]=pos;
+            //printf("%d\n",fin[j]);
+            j++;
+        }
+        else if(rem==1 && msb==1)
+        {
+            one_ctr++;
+            fin[j]=ctr1 - ctr + 1;
+            //printf("\nctr : %d",ctr);
+            //printf("%d\n",fin[j]);
+            j++;
+        }
+        n=n/2;
+    }
+    fin[0]=one_ctr;
+    ret[0] = fin[0];
+    
+    for(int i=1;i<one_ctr+1;i++)
+    {
+        //printf("%d\n",fin[i]);
+        ret[i] = fin[one_ctr + 1 - i];
+    }
+//printf("%d\n",one_ctr);
+    *result_size=one_ctr+1;
+    
+    //int x = (result_size);
+  //  printf("%d\n",*result_size);
+    //cout<<"size : "<<fin<<endl;
+    return ret;
+
+}
+
+
+
+int main() {
+	// your code goes here
+	int n = 161,result_size;
+	int *res;
+	res = CountBits(n,&result_size);
+	for(int i=0;i<result_size;i++)
+	{
+		cout<<res[i]<<endl;
+	}
+	return 0;
+}
